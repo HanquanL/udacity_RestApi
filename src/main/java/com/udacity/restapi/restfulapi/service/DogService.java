@@ -23,7 +23,9 @@ public class DogService {
     }
 
     public String retrieveDogBreedById(Long id){
-        return dogRepository.findBreedById(id);
+        Optional<String> optionalBreed = Optional.ofNullable(dogRepository.findBreedById(id));
+        String breed = optionalBreed.orElseThrow(DogNotFoundException::new);
+        return breed;
     }
 
     public List<String> retrieveDogNames() {
